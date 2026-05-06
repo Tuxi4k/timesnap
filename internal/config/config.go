@@ -9,7 +9,8 @@ type ServerConfig struct {
 }
 
 type DatabaseConfig struct {
-	Path string `mapstructure:"path"`
+	Path    string `mapstructure:"path"`
+	Migrate bool   `mapstructure:"migrate"`
 }
 
 type Config struct {
@@ -27,6 +28,7 @@ func Load() (*Config, error) {
 
 	v.SetDefault("server.port", 8000)
 	v.SetDefault("database.path", "db.sqlite3")
+	v.SetDefault("database.migrate", true)
 
 	err := v.ReadInConfig()
 	if err != nil {

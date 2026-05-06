@@ -16,7 +16,7 @@ func main() {
 		log.Fatalf("Failed to load config: %v", err)
 	}
 
-	_, err = database.InitDB()
+	_, err = database.InitDB(cfg)
 	if err != nil {
 		log.Fatalf("Failed to connect database: %v", err)
 	}
