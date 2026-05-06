@@ -14,7 +14,7 @@ func InitDB(cfg *config.Config) (*gorm.DB, error) {
 	}
 
 	if cfg.Database.Migrate {
-		err = db.AutoMigrate()
+		err = db.AutoMigrate(&deadline.Deadline{})
 		if err != nil {
 			return nil, err
 		}
