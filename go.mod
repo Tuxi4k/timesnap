@@ -3,6 +3,7 @@ module github.com/Tuxi4k/timesnap
 go 1.26.1
 
 require (
+	github.com/go-ozzo/ozzo-validation/v4 v4.3.0
 	github.com/gofiber/fiber/v2 v2.52.13
 	github.com/spf13/viper v1.21.0
 	gorm.io/driver/sqlite v1.6.0
