@@ -12,7 +12,7 @@ func (s *Service) GetAll() ([]Deadline, error) {
 	return s.repo.GetAll()
 }
 
-func (s *Service) GetById(id uint) (*Deadline, error) {
+func (s *Service) GetByID(id uint) (*Deadline, error) {
 	return s.repo.GetByID(id)
 }
 
