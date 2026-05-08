@@ -8,8 +8,8 @@ import (
 
 type Input struct {
 	Title    *string    `json:"title"`
-	Status   *string    `json:"status"`
-	Priority *string    `json:"priority"`
+	Status   *Status    `json:"status"`
+	Priority *Priority  `json:"priority"`
 	DueDate  *time.Time `json:"due_date"`
 }
 
@@ -33,9 +33,9 @@ func (i *Input) Validate(required bool) error {
 		),
 		validation.Field(
 			&i.Priority,
-			validation.When(required || i.Status != nil,
+			validation.When(required || i.Priority != nil,
 				validation.Required.Error("Обязательное поле")),
-			validation.When(required || i.Status != nil,
+			validation.When(required || i.Priority != nil,
 				validation.In(
 					PriorityLow,
 					PriorityMedium,

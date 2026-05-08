@@ -19,8 +19,8 @@ type Priority string
 type Deadline struct {
 	ID        uint      `json:"id"`
 	Title     string    `gorm:"not null" json:"title"`
-	Priority  string    `gorm:"type:varchar(10);not null;default:medium" json:"priority"`
-	Status    string    `gorm:"type:varchar(10);not null;default:active" json:"status"`
+	Priority  Priority  `gorm:"type:varchar(10);not null;default:medium" json:"priority"`
+	Status    Status    `gorm:"type:varchar(10);not null;default:active" json:"status"`
 	DueDate   time.Time `json:"due_date"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
