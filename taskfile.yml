@@ -2,4 +2,9 @@ version: "3"
 
 tasks:
   dev:
+    desk: "Режим разработки"
     cmd: "gow run cmd/main.go"
+
+  test:
+    desk: "Тестирование"
+    cmd: "go test ./... | grep -v '?'"
