@@ -33,6 +33,13 @@ func (h *Handler) RegisterRoutes(r fiber.Router) {
 	r.Delete("/:id", h.Delete)
 }
 
+// @Summary 		Get all deadlines
+// @Description		Returns list of all deadlines
+// @Tags			deadlines
+// @Produce			json
+// @Success			200	{array}		Deadline
+// @Failure			500	{object}	map[string]string
+// @Router			/deadlines		[get]
 func (h *Handler) GetAll(c *fiber.Ctx) error {
 	tasks, err := h.service.GetAll()
 	if err != nil {
@@ -42,6 +49,16 @@ func (h *Handler) GetAll(c *fiber.Ctx) error {
 	return c.Status(200).JSON(tasks)
 }
 
+// @Summary			Get deadline by id
+// @Description		Returns deadline by your id
+// @Tags			deadlines
+// @Produce			json
+// @Param			id	path	integer	true "Deadline id"
+// @Success			200	{object}	Deadline
+// @Failure			400	{object}	map[string]string
+// @Failure			404	{object}	map[string]string
+// @Failure			500	{object}	map[string]string
+// @Router			/deadlines/{id}	[get]
 func (h *Handler) GetByID(c *fiber.Ctx) error {
 	id, err := strconv.ParseUint(c.Params("id"), 10, 0)
 	if err != nil {
@@ -60,6 +77,15 @@ func (h *Handler) GetByID(c *fiber.Ctx) error {
 	return c.Status(200).JSON(task)
 }
 
+// @Summary			Create deadline
+// @Tags			deadlines
+// @Accept			json
+// @Produce			json
+// @Success			201	{object}	map[string]string
+// @Failure			400	{object}	map[string]string
+// @Failure			422	{object}	map[string]string
+// @Failure			500	{object}	map[string]string
+// @Router			/deadlines		[post]
 func (h *Handler) Create(c *fiber.Ctx) error {
 	var req request
 
@@ -88,6 +114,19 @@ func (h *Handler) Create(c *fiber.Ctx) error {
 	return c.Status(201).JSON(task)
 }
 
+// @Summary			Updates deadline
+// @Description		Partial updates deadline by your id
+// @Tags			deadlines
+// @Accept			json
+// @Produce			json
+// @Param			id	path	integer	true "Deadline id"
+// @Param			deadline	body	request	false "Updatable fields"
+// @Success			200	{object}	Deadline
+// @Failure			400	{object}	map[string]string
+// @Failure			422	{object}	map[string]string
+// @Failure			404	{object}	map[string]string
+// @Failure			500	{object}	map[string]string
+// @Router			/deadlines/{id}	[patch]
 func (h *Handler) Update(c *fiber.Ctx) error {
 	id, err := strconv.ParseUint(c.Params("id"), 10, 0)
 	if err != nil {
@@ -125,6 +164,17 @@ func (h *Handler) Update(c *fiber.Ctx) error {
 	return c.Status(200).JSON(task)
 }
 
+// @Summary			Delete deadline
+// @Description		Delete deadline by your id
+// @Tags			deadlines
+// @Accept			json
+// @Produce			json
+// @Param			id	path	integer	true "Deadline id"
+// @Success			204	"No content"
+// @Failure			400	{object}	map[string]string
+// @Failure			404	{object}	map[string]string
+// @Failure			500	{object}	map[string]string
+// @Router			/deadlines/{id}	[delete]
 func (h *Handler) Delete(c *fiber.Ctx) error {
 	id, err := strconv.ParseUint(c.Params("id"), 10, 0)
 	if err != nil {
