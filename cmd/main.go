@@ -5,6 +5,7 @@ import (
 
 	"github.com/Tuxi4k/timesnap/internal/config"
 	"github.com/Tuxi4k/timesnap/internal/database"
+	"github.com/Tuxi4k/timesnap/internal/modules/deadline"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -16,10 +17,17 @@ func main() {
 		log.Fatalf("Failed to load config: %v", err)
 	}
 
-	_, err = database.InitDB(cfg)
+	db, err := database.InitDB(cfg)
 	if err != nil {
 		log.Fatalf("Failed to connect database: %v", err)
 	}
+
+	deadlinesRoutes := app.Group("deadlines/")
+	deadlineRepo := deadline.NewRepository(db)
+	deadlineService := deadline.NewService(deadlineRepo)
+	deadlineHandler := deadline.NewHandler(deadlineService)
+
+	deadlineHandler.RegisterRoutes(deadlinesRoutes)
 
 	log.Fatalf("Server error: %v", app.Listen(":"+cfg.Server.Port))
 }
