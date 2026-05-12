@@ -1,0 +1,8 @@
+db.sqlite3
+README.md
+Dockerfile
+docker-compose.yml
+.github
+.dockerignore
+.git
+.gitignore
