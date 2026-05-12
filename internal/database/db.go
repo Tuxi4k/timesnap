@@ -3,7 +3,7 @@ package database
 import (
 	"github.com/Tuxi4k/timesnap/internal/config"
 	"github.com/Tuxi4k/timesnap/internal/modules/deadline"
-	"gorm.io/driver/sqlite"
+	"github.com/glebarez/sqlite"
 	"gorm.io/gorm"
 )
 

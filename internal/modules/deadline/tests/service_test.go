@@ -11,7 +11,7 @@ import (
 	"github.com/Tuxi4k/timesnap/pkg/utils/ptr"
 	validation "github.com/go-ozzo/ozzo-validation/v4"
 	"github.com/stretchr/testify/assert"
-	"gorm.io/driver/sqlite"
+	"github.com/glebarez/sqlite"
 	"gorm.io/gorm"
 )
 
