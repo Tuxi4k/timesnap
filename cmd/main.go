@@ -1,12 +1,15 @@
 package main
 
 import (
+	"context"
 	"log"
+	"time"
 
 	"github.com/Tuxi4k/swaggen"
 	"github.com/Tuxi4k/timesnap/internal/config"
 	"github.com/Tuxi4k/timesnap/internal/database"
 	"github.com/Tuxi4k/timesnap/internal/modules/deadline"
+	"github.com/Tuxi4k/timesnap/internal/pkg/worker"
 	"github.com/Tuxi4k/timesnap/pkg/utils/ptr"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/swagger"
@@ -30,6 +33,9 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to connect database: %v", err)
 	}
+
+	deadlineWorker := worker.New(db)
+	go deadlineWorker.Start(context.Background(), time.Minute)
 
 	registerSwagger(app, swaggerJSON)
 
