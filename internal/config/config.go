@@ -1,6 +1,9 @@
 package config
 
 import (
+	"fmt"
+	"os"
+
 	"github.com/spf13/viper"
 )
 
@@ -21,8 +24,15 @@ type Config struct {
 func Load() (*Config, error) {
 	var cfg Config
 
+	appMode := os.Getenv("APP_MODE")
+	if appMode != "prod" {
+		appMode = "dev"
+	}
+
+	configFile := fmt.Sprintf("config.%s", appMode)
+
 	v := viper.New()
-	v.SetConfigName("config")
+	v.SetConfigName(configFile)
 	v.SetConfigType("yaml")
 	v.AddConfigPath(".")
 

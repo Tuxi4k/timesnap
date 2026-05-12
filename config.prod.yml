@@ -1,0 +1,6 @@
+server:
+  port: 8000
+
+database:
+  path: sqlite/db.sqlite3
+  migrate: true
