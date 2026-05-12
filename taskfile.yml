@@ -7,4 +7,4 @@ tasks:
 
   test:
     desk: "Тестирование"
-    cmd: "go test ./... | grep -v '?'"
+    cmd: "go test ./..."
